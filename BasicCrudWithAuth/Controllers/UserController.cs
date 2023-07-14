@@ -1,9 +1,11 @@
-﻿using BusinessCore.Interfaces;
+﻿using BusinessCore;
+using BusinessCore.Interfaces;
 using BusinessCore.Services;
 using CoreObject.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace BasicCrudWithAuth.Controllers
 {
@@ -28,9 +30,11 @@ namespace BasicCrudWithAuth.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var result = await _userServices.Login(user);
+                LogService.LogInfo("00", "UserController", "Login", "Request Details \r\n" + JsonConvert.SerializeObject(user));
+                var result = await _userServices.Login(user);
+                LogService.LogInfo("00", "UserController", "LogOut", "Response Details \r\n" + JsonConvert.SerializeObject(user));
 
-                    return Ok(result);
+                return Ok(result);
                 }
 
                 return BadRequest("Invalid details");
@@ -45,12 +49,13 @@ namespace BasicCrudWithAuth.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var result = await _userServices.Register(user);
+                LogService.LogInfo("00", "UserController", "Register", "Request Details \r\n" + JsonConvert.SerializeObject(user));
+                var result = await _userServices.Register(user);
 
                     return Ok(result);
                 }
-
-                return BadRequest("Invalid details");
+            LogService.LogInfo("00", "UserController", "LogOut", "Response Details \r\n" + JsonConvert.SerializeObject(user));
+            return BadRequest("Invalid details");
             }
 
 
@@ -71,7 +76,8 @@ namespace BasicCrudWithAuth.Controllers
             {
                     var user = await _userServices.LogOut();
                     if (user == null) return BadRequest();
-                    return  user.Status ? Ok(user) : NoContent();
+            LogService.LogInfo("00", "UserController", "LogOut", "Response Details \r\n" + JsonConvert.SerializeObject(user));
+            return  user.Status ? Ok(user) : NoContent();
             }
      
         }

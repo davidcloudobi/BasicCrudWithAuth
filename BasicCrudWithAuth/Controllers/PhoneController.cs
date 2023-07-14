@@ -1,8 +1,10 @@
-﻿using BusinessCore.Interfaces;
+﻿using BusinessCore;
+using BusinessCore.Interfaces;
 using CoreObject.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace BasicCrudWithAuth.Controllers
 {
@@ -24,8 +26,9 @@ namespace BasicCrudWithAuth.Controllers
         {
             if (ModelState.IsValid)
             {
+                LogService.LogInfo("00", "PhoneController", "CreatePhone", "Response Details \r\n" + JsonConvert.SerializeObject(phone));
                 var result = await _userServices.CreatePhone(phone);
-
+                LogService.LogInfo("00", "PhoneController", "CreatePhone", "Response Details \r\n" + JsonConvert.SerializeObject(result));
                 return Ok(result);
             }
 
@@ -39,8 +42,9 @@ namespace BasicCrudWithAuth.Controllers
         {
             if (ModelState.IsValid)
             {
+                LogService.LogInfo("00", "PhoneController", "UpdatePhone", "Response Details \r\n" + JsonConvert.SerializeObject(phone));
                 var result = await _userServices.UpdatePhone(phone);
-
+                LogService.LogInfo("00", "PhoneController", "UpdatePhone", "Response Details \r\n" + JsonConvert.SerializeObject(result));
                 return Ok(result);
             }
 
@@ -54,8 +58,9 @@ namespace BasicCrudWithAuth.Controllers
         {
             if (ModelState.IsValid)
             {
+                LogService.LogInfo("00", "PhoneController", "GetPhone", "Response Details \r\n" + JsonConvert.SerializeObject(id));
                 var result = await _userServices.GetPhone(id);
-
+                LogService.LogInfo("00", "PhoneController", "GetPhone", "Response Details \r\n" + JsonConvert.SerializeObject(result));
                 return Ok(result);
             }
 
@@ -69,8 +74,9 @@ namespace BasicCrudWithAuth.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _userServices.GetPhones();
 
+                var result = await _userServices.GetPhones();
+                LogService.LogInfo("00", "PhoneController", "GetAllPhones", "Response Details \r\n" + JsonConvert.SerializeObject(result));
                 return Ok(result);
             }
 
@@ -84,8 +90,9 @@ namespace BasicCrudWithAuth.Controllers
         {
             if (ModelState.IsValid)
             {
+                LogService.LogInfo("00", "PhoneController", "SoftDeletePhone", "Response Details \r\n" + JsonConvert.SerializeObject(id));
                 var result = await _userServices.SoftDeletePhone(id);
-
+                LogService.LogInfo("00", "PhoneController", "SoftDeletePhone", "Response Details \r\n" + JsonConvert.SerializeObject(result));
                 return Ok(result);
             }
 
@@ -99,8 +106,10 @@ namespace BasicCrudWithAuth.Controllers
         {
             if (ModelState.IsValid)
             {
+                LogService.LogInfo("00", "PhoneController", "HardDeletePhone", "Response Details \r\n" + JsonConvert.SerializeObject(id));
                 var result = await _userServices.HradDeletePhone(id);
 
+                LogService.LogInfo("00", "PhoneController", "HardDeletePhone", "Response Details \r\n" + JsonConvert.SerializeObject(result));
                 return Ok(result);
             }
 

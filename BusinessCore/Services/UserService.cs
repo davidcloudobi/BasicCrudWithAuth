@@ -229,10 +229,13 @@ namespace BusinessCore.Services
                 var phone = await _dbContext.Phones.SingleOrDefaultAsync(x => x.Id == id && x.Status == true);
                 return phone;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+
+                LogService.LogError("00", "UserService", "GetPhone", ex);
+
+                return null;
             }
         }
 
@@ -244,10 +247,13 @@ namespace BusinessCore.Services
                 var users = await _dbContext.Phones.Where(x =>  x.Status == true).ToListAsync();
                 return users;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+
+                LogService.LogError("00", "UserService", "GetPhone", ex);
+
+                return null;
             }
         }
 
@@ -281,10 +287,13 @@ namespace BusinessCore.Services
                 response.Message = "Successful";
                 return response;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+
+                LogService.LogError("00", "UserService", "GetPhone", ex);
+
+                return null;
             }
         }
 
@@ -320,10 +329,13 @@ namespace BusinessCore.Services
                 response.Message = "Successful";
                 return response;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+
+                LogService.LogError("00", "UserService", "GetPhone", ex);
+
+                return null;
             }
         }
 
@@ -359,13 +371,18 @@ namespace BusinessCore.Services
                 response.Status = true;
                 response.Message = "Successful";
                 response.Data = phone;
+
                 return response;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+
+                LogService.LogError("00", "UserService", "GetPhone", ex);
+
+                return null;
             }
+        }
         }
 
 
